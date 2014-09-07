@@ -1,0 +1,5 @@
+cdata<-read.table(text = grep("^([1,2]/2/2007|Date)",readLines("household_power_consumption.txt"),value=TRUE),header = TRUE,sep = ";",na.strings = "?",colClasses = c("character", "character", rep("numeric", 7)))
+cdata <- cbind(datetime =strptime(paste(cdata$Date,cdata$Time),"%d/%m/%Y %H:%M:%S") ,cdata)
+png(filename="plot2.png",width=480,height=480)
+with(cdata,plot(datetime,Global_active_power,type ="l",xlab= "", ylab ="Global Active Power (kilowatts)"))
+dev.off()
